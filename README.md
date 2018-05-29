@@ -1,5 +1,5 @@
 # Docdash
-[![npm package](https://img.shields.io/npm/v/docdash.svg)](https://www.npmjs.com/package/docdash) [![license](https://img.shields.io/npm/l/docdash.svg)](LICENSE.md)
+[![npm version](https://badge.fury.io/js/countly-docdash.svg)](https://badge.fury.io/js/countly-docdash)
 
 Counlty Docdash is a fork of Docdash. It is a a clean, responsive documentation template theme for JSDoc 3. This repository includes several fixes and additions to Docdash.
 
@@ -7,19 +7,19 @@ Counlty Docdash is a fork of Docdash. It is a a clean, responsive documentation 
 
 
 ## Example
-See http://clenemt.github.io/docdash/ for a sample demo. :rocket:
+See http://countly.github.io/countly-server/browser/index.html for a sample demo. :rocket:
 
 ## Install
 
 ```bash
-$ npm install docdash
+$ npm install countly-docdash
 ```
 
 ## Usage
 Clone repository to your designated `jsdoc` template directory, then:
 
 ```bash
-$ jsdoc entry-file.js -t path/to/docdash
+$ jsdoc entry-file.js -t path/to/countly-docdash
 ```
 
 ## Usage (npm)
@@ -35,7 +35,7 @@ In your `jsdoc.json` file, add a template option.
 
 ```json
 "opts": {
-  "template": "node_modules/docdash"
+  "template": "node_modules/countly-docdash"
 }
 ```
 
@@ -56,7 +56,7 @@ See the config file for the [fixtures](fixtures/fixtures.conf.json) or the sampl
         "plugins/markdown"
     ],
     "opts": {
-        "template": "assets/template/docdash/",
+        "template": "assets/template/countly-docdash/",
         "encoding": "utf8",
         "destination": "docs/",
         "recurse": true,
@@ -102,7 +102,7 @@ Docdash supports the following options:
 Place them anywhere inside your `jsdoc.json` file.
 
 ## Thanks
-Thanks to [lodash](https://lodash.com) and [minami](https://github.com/nijikokun/minami).
+Thanks to [docdash](https://github.com/clenemt/docdash), [lodash](https://lodash.com) and [minami](https://github.com/nijikokun/minami).
 
 ## License
 Licensed under the Apache License, version 2.0. (see [Apache-2.0](LICENSE.md)).
