@@ -1,5 +1,5 @@
 # Docdash
-[![npm version](https://badge.fury.io/js/countly-docdash.svg)](https://badge.fury.io/js/countly-docdash)
+[![Build Status](https://api.travis-ci.org/Countly/countly-docdash.png?branch=master)](https://travis-ci.org/Countly/countly-docdash) [![npm version](https://badge.fury.io/js/countly-docdash.svg)](https://badge.fury.io/js/countly-docdash)
 
 Counlty Docdash is a fork of Docdash. It is a a clean, responsive documentation template theme for JSDoc 3. This repository includes several fixes and additions to Docdash.
 
