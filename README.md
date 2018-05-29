@@ -56,7 +56,7 @@ See the config file for the [fixtures](fixtures/fixtures.conf.json) or the sampl
         "plugins/markdown"
     ],
     "opts": {
-        "template": "assets/template/countly-docdash/",
+        "template": "node_modules/countly-docdash/",
         "encoding": "utf8",
         "destination": "docs/",
         "recurse": true,
@@ -78,18 +78,18 @@ Docdash supports the following options:
         "static": [false|true],         // Display the static members inside the navbar
         "sort": [false|true],           // Sort the methods in the navbar
         "disqus": "",                   // Shortname for your disqus (subdomain during site creation)
-		"openGraph": {                  // Open Graph options (mostly for Facebook and other sites to easily extract meta information)
-			"title": "",                // Title of the website
-			"type": "website",          // Type of the website
-			"image": "",                // Main image/logo
-			"site_name": "",            // Site name
-			"url": ""                   // Main canonical URL for the main page of the site
-		},
-		"meta": {                       // Meta information options (mostly for search engines that have not indexed your site yet)
-			"title": "",                // Also will be used as postfix to actualy page title, prefixed with object/document name
-			"description": "",          // Description of overal contents of your website
-			"keyword": ""               // Keywords for search engines
-		},
+	"openGraph": {                  // Open Graph options (mostly for Facebook and other sites to easily extract meta information)
+		"title": "",                // Title of the website
+		"type": "website",          // Type of the website
+		"image": "",                // Main image/logo
+		"site_name": "",            // Site name
+		"url": ""                   // Main canonical URL for the main page of the site
+	},
+	"meta": {                       // Meta information options (mostly for search engines that have not indexed your site yet)
+		"title": "",                // Also will be used as postfix to actualy page title, prefixed with object/document name
+		"description": "",          // Description of overal contents of your website
+		"keyword": ""               // Keywords for search engines
+	},
         "search": [false|true],         // Display seach box above navigation which allows to search/filter navigation items
         "collapse": [false|true],       // Collapse navigation by default except current object's navigation of the current page
         "typedefs": [false|true],       // Include typedefs in menu
