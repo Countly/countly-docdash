@@ -11,8 +11,8 @@
     "plugins": ["plugins/markdown"],
     "opts": {
         "encoding": "utf8",
-        "template": "../",
-        "destination": "../fixtures-doc/",
+        "template": "./",
+        "destination": "./fixtures-doc/",
         "recurse": true,
         "verbose": true
     },
@@ -32,18 +32,18 @@
         "static": false,
         "sort": true,
         "disqus": "",
-		"openGraph": {
-			"title": "",
-			"type": "website",
-			"image": "",
-			"site_name": "",
-			"url": ""
-		},
-		"meta": {
-			"title": "",
-			"description": "",
-			"keyword": ""
-		},
+	"openGraph": {
+		"title": "",
+		"type": "website",
+		"image": "",
+		"site_name": "",
+		"url": ""
+	},
+	"meta": {
+		"title": "",
+		"description": "",
+		"keyword": ""
+	},
         "search": false,
         "collapse": false,
         "typedefs": false,
