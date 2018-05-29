@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "6"
+- '6'
 sudo: false
 branches:
   except:
@@ -10,3 +10,6 @@ before_script:
 - npm install -g jsdoc
 script:
 - npm test
+notifications:
+  slack:
+    secure: RD9CBS9yr5vjFWlVFJyfSICsSaC89lD5oy9nvzws2TDwdwDZZTVoCwhAiQcebEa/F5uiK1GkJJFlzhahXTE9nfaMaijDaZMg2TmC9qOJGbv+pQ6lVZ/gIYTIIRZSlbLgaUJvTQ+eHTqceDOmQfVGZcdCbcAmx/2fSxqNcx5pHj8qUd+SvaQXQp7WlwqOINxrcOrvFyt5TZpBFrI6qbgETk31PQbVRMRxP8tEBR6YJ+HzUvj3JXL+82991yFwUm5mWihk1bk4nolbmDKVf+5QZwgHwcWULBBeagBwyzDGLXe7JUKLSqc5r3Aedb+0MGeELzEjgTvq4eOdvo5rpedHeAxPdJOika5YeecbBKYFyX0iwrmF1kF+sBH0SicfQmS9P3psR1KkYt7gQJWy/z5RCtj8TOsDM6hBKkQbY3zBLJHchIdigHR+F1pt47domEU9mu0/GvhNBJ6y5pBexjQvr/hhLRJgRElm4Qf08HvNsnWeXnI40JG2ZhqT/0JTxwaqmmGJRl5b1aj6PBvfTpDaKmIDk8R41iZ40l1L3q15s/NiuciIT7f9hTr+qFMmx/uO5fzgCAUsltWLZU/0Tp2HQNqxjIyYThcc2Fq7hUjfQgh4o2zZUwhqUrPxbEfQ9JxhWughqS8dzotqM4ag+52k5q4S3En2jDqwwDciOSl+7tw=
