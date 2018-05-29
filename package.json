@@ -1,7 +1,7 @@
 {
-  "name": "docdash",
-  "version": "0.4.0",
-  "description": "A clean, responsive documentation template theme for JSDoc 3 inspired by lodash and minami",
+  "name": "countly-docdash",
+  "version": "0.5.0",
+  "description": "A clean, responsive documentation template theme for JSDoc 3 inspired by docdash, lodash and minami",
   "main": "publish.js",
   "scripts": {
     "test": "jsdoc -c fixtures/fixtures.conf.json",
