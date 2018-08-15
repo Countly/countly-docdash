@@ -46,7 +46,7 @@ function needsSignature(doclet) {
     var needsSig = false;
 
     // function and class definitions always get a signature
-    if (doclet.kind === 'function' || doclet.kind === 'class') {
+    if (doclet.kind === 'function' || doclet.kind === 'class' && !doclet.hideconstructor) {
         needsSig = true;
     }
     // typedefs that contain functions get a signature, too
@@ -277,7 +277,7 @@ function attachModuleSymbols(doclets, modules) {
                 .map(function(symbol) {
                     symbol = doop(symbol);
 
-                    if (symbol.kind === 'class' || symbol.kind === 'function') {
+                    if (symbol.kind === 'class' || symbol.kind === 'function' && !symbol.hideconstructor) {
                         symbol.name = symbol.name.replace('module:', '(require("') + '"))';
                     }
 
@@ -294,15 +294,21 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
         var itemsNav = '';
 
         items.forEach(function(item) {
+            var displayName;
             var methods = find({kind:'function', memberof: item.longname});
             var members = find({kind:'member', memberof: item.longname});
             var docdash = env && env.conf && env.conf.docdash || {};
-
+            var conf = env && env.conf || {};
             if ( !hasOwnProp.call(item, 'longname') ) {
                 itemsNav += '<li>' + linktoFn('', item.name);
                 itemsNav += '</li>';
             } else if ( !hasOwnProp.call(itemsSeen, item.longname) ) {
-                itemsNav += '<li>' + linktoFn(item.longname, item.name.replace(/^module:/, ''));
+                if (conf.templates.default.useLongnameInNav) {
+                    displayName = item.longname;
+                } else {
+                    displayName = item.name;
+                }
+                itemsNav += '<li>' + linktoFn(item.longname, displayName.replace(/\b(module|event):/g, ''));
 
                 if (docdash.static && members.find(function (m) { return m.scope === 'static'; } )) {
                     itemsNav += "<ul class='members'>";
@@ -377,15 +383,21 @@ function buildNav(members) {
     var seen = {};
     var seenTutorials = {};
     var docdash = env && env.conf && env.conf.docdash || {};
-    
-    nav += buildMemberNav(members.classes, 'Classes', seen, linkto);
-    nav += buildMemberNav(members.modules, 'Modules', {}, linkto);
-    nav += buildMemberNav(members.externals, 'Externals', seen, linktoExternal);
-    nav += buildMemberNav(members.events, 'Events', seen, linkto);
-    nav += buildMemberNav(members.namespaces, 'Namespaces', seen, linkto);
-    nav += buildMemberNav(members.mixins, 'Mixins', seen, linkto);
-    nav += buildMemberNav(members.tutorials, 'Tutorials', seenTutorials, linktoTutorial);
-    nav += buildMemberNav(members.interfaces, 'Interfaces', seen, linkto);
+    var defaultOrder = [
+        'Classes', 'Modules', 'Externals', 'Events', 'Namespaces', 'Mixins', 'Tutorials', 'Interfaces'
+    ];
+    var order = docdash.sectionOrder || defaultOrder;
+    var sections = {
+        Classes: buildMemberNav(members.classes, 'Classes', seen, linkto),
+        Modules: buildMemberNav(members.modules, 'Modules', {}, linkto),
+        Externals: buildMemberNav(members.externals, 'Externals', seen, linktoExternal),
+        Events: buildMemberNav(members.events, 'Events', seen, linkto),
+        Namespaces: buildMemberNav(members.namespaces, 'Namespaces', seen, linkto),
+        Mixins: buildMemberNav(members.mixins, 'Mixins', seen, linkto),
+        Tutorials: buildMemberNav(members.tutorials, 'Tutorials', seenTutorials, linktoTutorial),
+        Interfaces: buildMemberNav(members.interfaces, 'Interfaces', seen, linkto),
+    };
+    order.forEach(member => nav += sections[member]);
 
     if (members.globals.length) {
         var globalNav = '';
@@ -477,14 +489,14 @@ exports.publish = function(taffyData, opts, tutorials) {
             doclet.examples = doclet.examples.map(function(example) {
                 var caption, code;
 
-                if (example.match(/^\s*<caption>([\s\S]+?)<\/caption>(\s*[\n\r])([\s\S]+)$/i)) {
+                if (example && example.match(/^\s*<caption>([\s\S]+?)<\/caption>(\s*[\n\r])([\s\S]+)$/i)) {
                     caption = RegExp.$1;
                     code = RegExp.$3;
                 }
 
                 return {
                     caption: caption || '',
-                    code: code || example
+                    code: code || example || ''
                 };
             });
         }
@@ -522,7 +534,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     staticFiles.forEach(function(fileName) {
         var toDir = fs.toDir( fileName.replace(fromDir, outdir) );
         fs.mkPath(toDir);
-        fs.copyFileSync(fileName, toDir);
+        fs.copyFile(fileName, path.join(toDir, path.basename(fileName)), function(){});
     });
 
     // copy user-specified static files to outdir
@@ -545,7 +557,7 @@ exports.publish = function(taffyData, opts, tutorials) {
                 var sourcePath = fs.toDir(filePath);
                 var toDir = fs.toDir( fileName.replace(sourcePath, outdir) );
                 fs.mkPath(toDir);
-                fs.copyFileSync(fileName, toDir);
+                fs.copyFile(fileName, path.join(toDir, path.basename(fileName)), function(){});
             });
         });
     }

@@ -77,6 +77,16 @@ Docdash supports the following options:
     "docdash": {
         "static": [false|true],         // Display the static members inside the navbar
         "sort": [false|true],           // Sort the methods in the navbar
+        "sectionOrder": [        // Order the main section in the navbar (default order shown here)
+             "Classes",
+             "Modules",
+             "Externals",
+             "Events",
+             "Namespaces",
+             "Mixins",
+             "Tutorials",
+             "Interfaces"
+        ]
         "disqus": "",                   // Shortname for your disqus (subdomain during site creation)
 	"openGraph": {                  // Open Graph options (mostly for Facebook and other sites to easily extract meta information)
 		"title": "",                // Title of the website

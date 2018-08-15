@@ -18,7 +18,8 @@
     },
     "markdown": {
         "parser": "gfm",
-        "hardwrap": true
+        "hardwrap": true,
+        "idInHeadings": true
     },
     "templates": {
         "cleverLinks": false,
@@ -29,7 +30,7 @@
         }
     },
     "docdash": {
-        "static": false,
+        "static": true,
         "sort": true,
         "disqus": "",
 	"openGraph": {
@@ -44,9 +45,9 @@
 		"description": "",
 		"keyword": ""
 	},
-        "search": false,
-        "collapse": false,
-        "typedefs": false,
+        "search": true,
+        "collapse": true,
+        "typedefs": true,
         "removeQuotes": "none",
         "scripts": []
     }
