@@ -21,6 +21,30 @@ var view;
 
 var outdir = path.normalize(env.opts.destination);
 
+function copyFile(source, target, cb) {
+  var cbCalled = false;
+
+  var rd = fs.createReadStream(source);
+  rd.on("error", function(err) {
+    done(err);
+  });
+  var wr = fs.createWriteStream(target);
+  wr.on("error", function(err) {
+    done(err);
+  });
+  wr.on("close", function(ex) {
+    done();
+  });
+  rd.pipe(wr);
+
+  function done(err) {
+    if (!cbCalled) {
+      cb(err);
+      cbCalled = true;
+    }
+  }
+}
+
 function find(spec) {
     return helper.find(data, spec);
 }
@@ -534,7 +558,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     staticFiles.forEach(function(fileName) {
         var toDir = fs.toDir( fileName.replace(fromDir, outdir) );
         fs.mkPath(toDir);
-        fs.copyFile(fileName, path.join(toDir, path.basename(fileName)), function(){});
+        copyFile(fileName, path.join(toDir, path.basename(fileName)), function(err){if(err) console.err(err);});
     });
 
     // copy user-specified static files to outdir
@@ -557,7 +581,7 @@ exports.publish = function(taffyData, opts, tutorials) {
                 var sourcePath = fs.toDir(filePath);
                 var toDir = fs.toDir( fileName.replace(sourcePath, outdir) );
                 fs.mkPath(toDir);
-                fs.copyFile(fileName, path.join(toDir, path.basename(fileName)), function(){});
+                copyFile(fileName, path.join(toDir, path.basename(fileName)), function(err){if(err) console.err(err);});
             });
         });
     }
