@@ -407,6 +407,16 @@ function buildNav(members) {
     var seen = {};
     var seenTutorials = {};
     var docdash = env && env.conf && env.conf.docdash || {};
+    if(docdash.menu){
+        for(var menu in docdash.menu){
+            nav += '<h2><a ';
+            //add attributes
+            for(var attr in docdash.menu[menu]){
+                nav += attr+'="' + docdash.menu[menu][attr] + '" ';
+            }
+            nav += '>' + menu + '</a></h2>';
+        }
+    }
     var defaultOrder = [
         'Classes', 'Modules', 'Externals', 'Events', 'Namespaces', 'Mixins', 'Tutorials', 'Interfaces'
     ];

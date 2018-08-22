@@ -49,6 +49,14 @@
         "collapse": true,
         "typedefs": true,
         "removeQuotes": "none",
-        "scripts": []
+        "scripts": [],
+        "menu":{
+            "Github repo":{
+                "href":"https://github.com/clenemt/docdash",
+                "target":"_blank",
+                "class":"menu-item",
+                "id":"repository"
+            }
+        }
     }
 }
